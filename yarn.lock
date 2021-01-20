@@ -9269,10 +9269,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
-react-player@^2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.7.2.tgz#aa40690fdd89a3e9e725e13bc4ace9ae88c30142"
-  integrity sha512-4MqikwtVAxjDlgYp5Kgnz6Uptj/VpYE4VKvg2hOXlgz4zxorsxjBUE8Y3GUY6vpolEMPjpYIxSr1CP4TNrD1WA==
+react-player@^2.8.1:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.8.1.tgz#1fe315ae960ffc5e1588aefb336beb2dd34fcc08"
+  integrity sha512-gv7I8QU5k+8YHmHOiOxDFs8ZWU7pm7UPHjmMLfCBe+vcIEVpZ53w4b0hKF4WGVhyLXvBW2/c3A4nXJctVqvhsw==
   dependencies:
     deepmerge "^4.0.0"
     load-script "^1.0.0"
