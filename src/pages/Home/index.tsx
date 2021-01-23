@@ -10,6 +10,7 @@ import VodGallery from '../../components/VodGallery';
 import LinkBox from '../../components/LinkBox';
 import Footer from '../../components/Footer';
 import QualitySelection from '../../components/QualitySelection';
+import ErrorModal from '../../components/ErrorModal';
 
 interface TwitchVideoProps {
   videos: Array<{
@@ -97,7 +98,7 @@ const Home: React.FC = () => {
           </button>
         </form>
 
-        {error && <span>{error}</span>}
+        {error && <ErrorModal message={error} />}
 
         <LinkBox clips />
         <LinkBox vods />

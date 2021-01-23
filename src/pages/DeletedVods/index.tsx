@@ -10,6 +10,7 @@ import LinkBox from '../../components/LinkBox';
 import InfoModal from '../../components/InfoModal';
 import Footer from '../../components/Footer';
 import QualitySelection from '../../components/QualitySelection';
+import ErrorModal from '../../components/ErrorModal';
 
 const DeletedVods: React.FC = () => {
   useEffect(() => {
@@ -113,7 +114,7 @@ const DeletedVods: React.FC = () => {
           </span>
         ) : (
           error && (
-            <span>The VOD you're looking for is no longer available</span>
+            <ErrorModal message="The VOD you're looking for is no longer available" />
           )
         )}
       </AnimationContainer>

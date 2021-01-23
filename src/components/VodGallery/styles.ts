@@ -6,21 +6,6 @@ interface AnimatedProps {
   animated: any;
 }
 
-export const Error = styled.span`
-  display: flex;
-  place-items: center;
-  padding: 5rem;
-
-  svg {
-    color: #ff0033;
-    margin-right: 1rem;
-  }
-
-  span {
-    font-size: 2rem;
-  }
-`;
-
 export const Container = styled.div`
   max-width: 60rem;
   display: flex;

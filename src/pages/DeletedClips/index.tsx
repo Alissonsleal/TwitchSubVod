@@ -9,6 +9,7 @@ import { Container, AnimationContainer } from './styles';
 import LinkBox from '../../components/LinkBox';
 import InfoModal from '../../components/InfoModal';
 import Footer from '../../components/Footer';
+import ErrorModal from '../../components/ErrorModal';
 
 const DeletedClips: React.FC = () => {
   useEffect(() => {
@@ -38,8 +39,8 @@ const DeletedClips: React.FC = () => {
   if (loading) {
     setTimeout(() => {
       setLoading(false);
-      !data && setNoData(true);
-    }, 5000);
+      data[0] === '' && setNoData(true);
+    }, 3000);
   }
 
   const handleSubmit = async () => {
@@ -206,7 +207,10 @@ const DeletedClips: React.FC = () => {
           </>
         )}
 
-        {noData && <span>There are no clips in the time specified</span>}
+        {noData && (
+          <ErrorModal message="There are no clips in the time specified" />
+        )}
+        {data && console.log(data)}
       </AnimationContainer>
       <Footer />
     </Container>

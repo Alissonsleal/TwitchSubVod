@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactGA from 'react-ga';
-import { FiAlertCircle } from 'react-icons/fi';
+import ErrorModal from '../ErrorModal';
 
 import VodModal from '../VodModal';
 
-import { Error, Container, Image } from './styles';
+import { Container, Image } from './styles';
 
 interface ResultProps {
   _id: string;
@@ -77,12 +77,7 @@ const VodGallery = ({ data, quality }: any) => {
   return (
     <>
       {vodUrl && <VodModal videoUrl={vodUrl} />}
-      {error && !vodUrl && (
-        <Error>
-          <FiAlertCircle size={36} />
-          <span>Couldn't find this video</span>
-        </Error>
-      )}
+      {error && !vodUrl && <ErrorModal message="Couldn't find this video" />}
 
       <Container>
         {data.map((result: ResultProps) => {
