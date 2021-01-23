@@ -24,6 +24,7 @@ const DeletedVods: React.FC = () => {
   const [vodId, setVodId] = useState('');
   const [data, setData] = useState('');
   const [vodQuality, setVodQuality] = useState('chunked');
+  const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -38,6 +39,8 @@ const DeletedVods: React.FC = () => {
         const link = response.data
           .split(`https://vod-metro.twitch.tv/`)[1]
           .split('/')[0];
+
+        setUsername(link.split('_')[1]);
 
         let finalLink = `${process.env.REACT_APP_CORS}https://vod-metro.twitch.tv/${link}/${vodQuality}/index-dvr.m3u8`;
         setData(finalLink);
@@ -99,6 +102,7 @@ const DeletedVods: React.FC = () => {
 
         {data && !error ? (
           <>
+            <h1>Streamer: {username}</h1>
             <div className="video-container">
               <ReactPlayer
                 key={data}

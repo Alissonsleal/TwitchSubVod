@@ -70,6 +70,10 @@ export const AnimationContainer = styled.div`
     }
   }
 
+  h1 {
+    margin-bottom: 0;
+  }
+
   .video-container {
     max-width: 60rem;
     margin: 2rem 0;

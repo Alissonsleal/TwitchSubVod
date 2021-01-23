@@ -19,6 +19,9 @@ interface ResultProps {
   url: string;
   length: number; //in seconds
   game: string;
+  channel: {
+    display_name: string;
+  };
 }
 
 export const formatNumber = (num: number) => {
@@ -32,6 +35,7 @@ export const formatNumber = (num: number) => {
 };
 
 const VodGallery = ({ data, quality }: any) => {
+  console.log(data[0].channel.display_name);
   useEffect(() => {
     ReactGA.initialize(`${process.env.REACT_APP_GOOGLE_TRACKING}`, {
       testMode: process.env.NODE_ENV === 'test',
@@ -76,6 +80,7 @@ const VodGallery = ({ data, quality }: any) => {
 
   return (
     <>
+      {data && <h1>Streamer: {data[0].channel.display_name}</h1>}
       {vodUrl && <VodModal videoUrl={vodUrl} />}
       {error && !vodUrl && <ErrorModal message="Couldn't find this video" />}
 
