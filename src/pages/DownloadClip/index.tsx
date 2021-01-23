@@ -9,6 +9,8 @@ import { Container, AnimationContainer, Thumbnail } from './styles';
 import LinkBox from '../../components/LinkBox';
 import Footer from '../../components/Footer';
 import { formatNumber } from '../../components/VodGallery';
+import LoadingModal from '../../components/LoadingModal';
+import ErrorModal from '../../components/ErrorModal';
 
 interface TwitchVideoProps {
   slug: string;
@@ -30,6 +32,8 @@ const DownloadClip: React.FC = () => {
 
   const [clip, setClip] = useState('');
   const [twitchData, setTwitchData] = useState<TwitchVideoProps>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const clipSlug = (clipURL: string) => {
     let splittedClip = clipURL.split('/');
@@ -37,9 +41,13 @@ const DownloadClip: React.FC = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
+    setError('');
+
     try {
       const { data } = await api.get(`clips/${clipSlug(clip)}`);
       setTwitchData(data);
+      setLoading(false);
 
       ReactGA.event({
         category: 'DownloadedClip',
@@ -47,6 +55,8 @@ const DownloadClip: React.FC = () => {
       });
     } catch (err) {
       console.log(err);
+      setLoading(false);
+      setError('Could not find the clip');
     }
   };
 
@@ -76,6 +86,9 @@ const DownloadClip: React.FC = () => {
         <LinkBox home />
         <LinkBox clips />
         <LinkBox vods />
+
+        {loading && <LoadingModal />}
+        {error && <ErrorModal message={error} />}
 
         {twitchData && (
           <Thumbnail>

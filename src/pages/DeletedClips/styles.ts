@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import { spin } from '../DeletedVods/styles';
 
 const appearFromBottom = keyframes`
   from {
@@ -86,12 +85,6 @@ export const AnimationContainer = styled.div`
 
     & svg {
       margin-right: 0.5rem;
-    }
-  }
-
-  span {
-    & svg {
-      animation: ${spin} 4s linear infinite;
     }
   }
 

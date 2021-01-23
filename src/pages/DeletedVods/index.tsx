@@ -3,7 +3,7 @@ import ReactGA from 'react-ga';
 import axios from 'axios';
 import ReactPlayer from 'react-player';
 
-import { FiSearch, FiLoader } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 
 import { Container, AnimationContainer } from './styles';
 import LinkBox from '../../components/LinkBox';
@@ -11,6 +11,7 @@ import InfoModal from '../../components/InfoModal';
 import Footer from '../../components/Footer';
 import QualitySelection from '../../components/QualitySelection';
 import ErrorModal from '../../components/ErrorModal';
+import LoadingModal from '../../components/LoadingModal';
 
 const DeletedVods: React.FC = () => {
   useEffect(() => {
@@ -109,9 +110,7 @@ const DeletedVods: React.FC = () => {
             </div>
           </>
         ) : loading ? (
-          <span>
-            <FiLoader size={32} />
-          </span>
+          <LoadingModal />
         ) : (
           error && (
             <ErrorModal message="The VOD you're looking for is no longer available" />

@@ -11,6 +11,7 @@ import LinkBox from '../../components/LinkBox';
 import Footer from '../../components/Footer';
 import QualitySelection from '../../components/QualitySelection';
 import ErrorModal from '../../components/ErrorModal';
+import LoadingModal from '../../components/LoadingModal';
 
 interface TwitchVideoProps {
   videos: Array<{
@@ -40,8 +41,10 @@ const Home: React.FC = () => {
   const [twitchData, setTwitchData] = useState<TwitchVideoProps>();
   const [quality, setQuality] = useState('chunked');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
+    setLoading(true);
     try {
       setError('');
       api.get(`users?login=${username}`).then((response) => {
@@ -50,9 +53,11 @@ const Home: React.FC = () => {
             .get(`channels/${response.data.users[0]._id}/videos?limit=100`)
             .then((response: any) => {
               setTwitchData(response.data);
+              setLoading(false);
               console.log(response.data._total);
               if (response.data._total === 0) {
                 setError('This streamer does not have any available streams');
+                setLoading(false);
               }
             });
 
@@ -62,11 +67,12 @@ const Home: React.FC = () => {
           });
         } catch (err) {
           setError('This user does not exist or is unavailable');
+          setLoading(false);
         }
       });
     } catch (err) {
       console.log(err);
-      setError('4th message');
+      setLoading(false);
     }
 
     (quality || twitchData) && console.log(quality, twitchData);
@@ -103,6 +109,8 @@ const Home: React.FC = () => {
         <LinkBox clips />
         <LinkBox vods />
         <LinkBox download />
+
+        {loading && <LoadingModal />}
 
         {twitchData && (
           <>
