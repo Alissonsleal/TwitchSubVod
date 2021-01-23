@@ -38,23 +38,34 @@ const Home: React.FC = () => {
   const [username, setUsername] = useState('');
   const [twitchData, setTwitchData] = useState<TwitchVideoProps>();
   const [quality, setQuality] = useState('chunked');
+  const [error, setError] = useState('');
 
   const handleSubmit = () => {
     try {
+      setError('');
       api.get(`users?login=${username}`).then((response) => {
-        api
-          .get(`channels/${response.data.users[0]._id}/videos?limit=100`)
-          .then((response) => {
-            setTwitchData(response.data);
-          });
+        try {
+          api
+            .get(`channels/${response.data.users[0]._id}/videos?limit=100`)
+            .then((response: any) => {
+              setTwitchData(response.data);
+              console.log(response.data._total);
+              if (response.data._total === 0) {
+                setError('This streamer does not have any available streams');
+              }
+            });
 
-        ReactGA.event({
-          category: 'SearchedUserForDeletedVod',
-          action: `${username}`,
-        });
+          ReactGA.event({
+            category: 'SearchedUserForDeletedVod',
+            action: `${username}`,
+          });
+        } catch (err) {
+          setError('This user does not exist or is unavailable');
+        }
       });
     } catch (err) {
       console.log(err);
+      setError('4th message');
     }
 
     (quality || twitchData) && console.log(quality, twitchData);
@@ -85,6 +96,8 @@ const Home: React.FC = () => {
             Search
           </button>
         </form>
+
+        {error && <span>{error}</span>}
 
         <LinkBox clips />
         <LinkBox vods />
